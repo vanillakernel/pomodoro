@@ -42,7 +42,7 @@ return (sec < 10 ? '0' : '') + sec;
 
 function countDown()
 {
-	seconds = 0; // this is for the edge case where I get triple zeroes if I reset then start again.
+//	seconds = 0; // this is for the edge case where I get triple zeroes if I reset then start again.
 	document.getElementById("countDownButton").disabled = true;	
 	document.getElementById("plusButton").disabled = true;	
 	document.getElementById("minusButton").disabled = true;	
