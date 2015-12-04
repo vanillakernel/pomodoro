@@ -33,21 +33,25 @@ function minusTime(){
 }
 
 //SIGH AT LEADING ZEROES
-function leadingZeroes(seconds) {
-	    return (seconds < 10) ? '0' + seconds.toString() : seconds.toString();
+function leadingZeroes(sec) {
+
+return (sec < 10 ? '0' : '') + sec;
+
 }
 
 
 function countDown()
 {
+	seconds = 0; // this is for the edge case where I get triple zeroes if I reset then start again.
 	document.getElementById("countDownButton").disabled = true;	
 	document.getElementById("plusButton").disabled = true;	
 	document.getElementById("minusButton").disabled = true;	
 	remaining=setTimeout(function(){countDown()}, 1000)
 
+	seconds=(leadingZeroes(seconds));
 	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds;
 	
-	seconds=seconds-1;
+	seconds-=1;
 	if (seconds<1)
 	{ 
 		minutes=minutes-1; seconds=59;
@@ -63,7 +67,8 @@ function countDown()
 function reset()
 {
 	minutes=25;
-	seconds=00;
+	seconds=0;
+	seconds=leadingZeroes(seconds);
 	window.clearTimeout(remaining)
         document.getElementById("countDownButton").disabled = false;	
 	document.getElementById("plusButton").disabled = false;	
