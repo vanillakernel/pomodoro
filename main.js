@@ -19,26 +19,35 @@
 // FUNCTIONAL PROGRAMMING FTW. OOP is for nouns, this is all verbing.
 
 var minutes = 25;
-var seconds = 00;
+var seconds =  0;
 var remaining = 0; 
 
 function plusTime(){
 	minutes+=1; //just add a minute. 
+	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds
 }
 
 function minusTime(){
 	minutes-=1; //just take a minute. 
+	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds
 }
+
+//SIGH AT LEADING ZEROES
+function leadingZeroes(seconds) {
+	    return (seconds < 10) ? '0' + seconds.toString() : seconds.toString();
+}
+
 
 function countDown()
 {
-	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds+" remaining"
-		seconds=seconds-1;
-		remaining=setTimeout("countDown()", 1000)
+	document.getElementById("countDownButton").disabled = true;	
+	document.getElementById("plusButton").disabled = true;	
+	document.getElementById("minusButton").disabled = true;	
+	remaining=setTimeout(function(){countDown()}, 1000)
 
-	if (seconds == 0){
-		seconds = 00;
-	}		
+	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds;
+	
+	seconds=seconds-1;
 	if (seconds<1)
 	{ 
 		minutes=minutes-1; seconds=59;
@@ -47,11 +56,18 @@ function countDown()
 	if (minutes<0)
 	{
 		reset();
+		
 	}
 }
 
 function reset()
 {
-	reset(remaining)
-		document.getElementById('clockDiv').value="GAME OVER MAN. GAME OVER."
+	minutes=25;
+	seconds=00;
+	window.clearTimeout(remaining)
+        document.getElementById("countDownButton").disabled = false;	
+	document.getElementById("plusButton").disabled = false;	
+	document.getElementById("minusButton").disabled = false;	
+	document.getElementById('clockDiv').innerHTML=minutes+":"+seconds;
+	
 }
